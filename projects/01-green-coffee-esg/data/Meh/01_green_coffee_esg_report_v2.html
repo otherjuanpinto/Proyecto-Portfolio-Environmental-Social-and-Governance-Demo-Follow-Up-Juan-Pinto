@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Juan Paulo Pinto Sandoval">
+<meta name="dcterms.date" content="2026-02-07">
+
+<title>Green Coffee ESG Intelligence</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="01_green_coffee_esg_report_v2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01_green_coffee_esg_report_v2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="01_green_coffee_esg_report_v2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="01_green_coffee_esg_report_v2_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="01_green_coffee_esg_report_v2_files/libs/quarto-html/popper.min.js"></script>
+<script src="01_green_coffee_esg_report_v2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="01_green_coffee_esg_report_v2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="01_green_coffee_esg_report_v2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01_green_coffee_esg_report_v2_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="01_green_coffee_esg_report_v2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="01_green_coffee_esg_report_v2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="01_green_coffee_esg_report_v2_files/libs/bootstrap/bootstrap-4d7f0bce1131f3e5f9547cd857cfbfc8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#p5" id="toc-p5" class="nav-link active" data-scroll-target="#p5">p5</a></li>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link" data-scroll-target="#executive-summary">1. Executive Summary</a></li>
+  <li><a href="#context-strategic-use-case" id="toc-context-strategic-use-case" class="nav-link" data-scroll-target="#context-strategic-use-case">2. Context &amp; Strategic Use Case</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">3. Data Sources</a></li>
+  <li><a href="#assumptions-limitations" id="toc-assumptions-limitations" class="nav-link" data-scroll-target="#assumptions-limitations">4. Assumptions &amp; Limitations</a></li>
+  <li><a href="#load-processed-data" id="toc-load-processed-data" class="nav-link" data-scroll-target="#load-processed-data">5. Load Processed Data</a></li>
+  <li><a href="#production-benchmarking-faostat" id="toc-production-benchmarking-faostat" class="nav-link" data-scroll-target="#production-benchmarking-faostat">6. Production Benchmarking (FAOSTAT)</a>
+  <ul class="collapse">
+  <li><a href="#production-trends-over-time" id="toc-production-trends-over-time" class="nav-link" data-scroll-target="#production-trends-over-time">6.1 Production trends over time</a></li>
+  <li><a href="#average-production-last-5-years" id="toc-average-production-last-5-years" class="nav-link" data-scroll-target="#average-production-last-5-years">6.2 Average production (last 5 years)</a></li>
+  </ul></li>
+  <li><a href="#social-rural-indicators-world-bank" id="toc-social-rural-indicators-world-bank" class="nav-link" data-scroll-target="#social-rural-indicators-world-bank">7. Social &amp; Rural Indicators (World Bank)</a>
+  <ul class="collapse">
+  <li><a href="#employment-in-agriculture-proxy-rural-dependence" id="toc-employment-in-agriculture-proxy-rural-dependence" class="nav-link" data-scroll-target="#employment-in-agriculture-proxy-rural-dependence">7.1 Employment in agriculture (proxy: rural dependence)</a></li>
+  <li><a href="#rural-population-growth-proxy-rural-pressure" id="toc-rural-population-growth-proxy-rural-pressure" class="nav-link" data-scroll-target="#rural-population-growth-proxy-rural-pressure">7.2 Rural population growth (proxy: rural pressure)</a></li>
+  </ul></li>
+  <li><a href="#proxy-esg-score-transparent-model" id="toc-proxy-esg-score-transparent-model" class="nav-link" data-scroll-target="#proxy-esg-score-transparent-model">8. Proxy ESG Score (Transparent model)</a>
+  <ul class="collapse">
+  <li><a href="#score-table" id="toc-score-table" class="nav-link" data-scroll-target="#score-table">8.1 Score table</a></li>
+  <li><a href="#visual-comparison" id="toc-visual-comparison" class="nav-link" data-scroll-target="#visual-comparison">8.2 Visual comparison</a></li>
+  </ul></li>
+  <li><a href="#strategic-recommendations-3" id="toc-strategic-recommendations-3" class="nav-link" data-scroll-target="#strategic-recommendations-3">9. Strategic Recommendations (3)</a>
+  <ul class="collapse">
+  <li><a href="#recommendation-1-diversify-away-from-concentration-risk" id="toc-recommendation-1-diversify-away-from-concentration-risk" class="nav-link" data-scroll-target="#recommendation-1-diversify-away-from-concentration-risk">Recommendation 1 — Diversify away from concentration risk</a></li>
+  <li><a href="#recommendation-2-integrate-a-social-exposure-lens" id="toc-recommendation-2-integrate-a-social-exposure-lens" class="nav-link" data-scroll-target="#recommendation-2-integrate-a-social-exposure-lens">Recommendation 2 — Integrate a “Social Exposure Lens”</a></li>
+  <li><a href="#recommendation-3-use-esg-proxy-scores-only-as-a-discussion-tool" id="toc-recommendation-3-use-esg-proxy-scores-only-as-a-discussion-tool" class="nav-link" data-scroll-target="#recommendation-3-use-esg-proxy-scores-only-as-a-discussion-tool">Recommendation 3 — Use ESG proxy scores only as a discussion tool</a></li>
+  </ul></li>
+  <li><a href="#next-iteration-version-3-roadmap" id="toc-next-iteration-version-3-roadmap" class="nav-link" data-scroll-target="#next-iteration-version-3-roadmap">10. Next Iteration (Version 3 roadmap)</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01_green_coffee_esg_report_v2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Green Coffee ESG Intelligence</h1>
+<p class="subtitle lead">Benchmarking ESG-relevant indicators across coffee origins</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Juan Paulo Pinto Sandoval </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>library(readr) library(dplyr) library(tidyr) library(scales) library(ggplot2) library(knitr) library(kableExtra)</p>
+<p>BASE &lt;- “C:/Users/juanp/Documents/Meh” PROCESSED &lt;- file.path(BASE, “data”, “processed”)</p>
+<p>coffee &lt;- read_csv(file.path(PROCESSED, “coffee_clean.csv”)) full_data &lt;- read_csv(file.path(PROCESSED, “full_data.csv”)) esg_score &lt;- read_csv(file.path(PROCESSED, “esg_score.csv”))</p>
+<p>glimpse(coffee)</p>
+<p>p1 &lt;- coffee %&gt;% ggplot(aes(x = year, y = production_tonnes, color = country)) + geom_line(linewidth = 1.2) + scale_y_continuous(labels = label_number(scale = 1e-6, suffix = “M t”)) + labs( title = “Coffee production trends (FAOSTAT)”, subtitle = “Brazil dominates total supply among the selected origins”, x = “Year”, y = “Production (tonnes)”, color = “Origin” ) + theme_minimal(base_size = 13) + theme(legend.position = “bottom”)</p>
+<p>p1</p>
+<p>ranking &lt;- coffee %&gt;% filter(year &gt;= max(year, na.rm = TRUE) - 4) %&gt;% group_by(country) %&gt;% summarise(avg_prod = mean(production_tonnes, na.rm = TRUE), .groups = “drop”) %&gt;% arrange(desc(avg_prod))</p>
+<p>p2 &lt;- ranking %&gt;% ggplot(aes(x = reorder(country, avg_prod), y = avg_prod)) + geom_col() + coord_flip() + scale_y_continuous(labels = label_number(scale = 1e-6, suffix = “M t”)) + labs( title = “Average coffee production (last 5 years)”, subtitle = “Supply concentration should be treated as a strategic sourcing risk”, x = “Origin”, y = “Average production (tonnes)” ) + theme_minimal(base_size = 13)</p>
+<p>p2</p>
+<p>p3 &lt;- full_data %&gt;% ggplot(aes(x = year, y = poverty_rate, color = country)) + geom_line(linewidth = 1.1) + labs( title = “Employment in agriculture (%)”, subtitle = “Higher values suggest higher dependence on rural/agricultural livelihoods”, x = “Year”, y = “% of total employment”, color = “Origin” ) + theme_minimal(base_size = 13) + theme(legend.position = “bottom”)</p>
+<p>p3</p>
+<p>p4 &lt;- full_data %&gt;% ggplot(aes(x = year, y = rural_growth, color = country)) + geom_line(linewidth = 1.1) + labs( title = “Rural population growth (%)”, subtitle = “A proxy for demographic pressure and rural transformation”, x = “Year”, y = “Annual growth (%)”, color = “Origin” ) + theme_minimal(base_size = 13) + theme(legend.position = “bottom”)</p>
+<p>p4</p>
+<p>esg_score %&gt;% arrange(desc(esg_score)) %&gt;% mutate(esg_score = round(esg_score, 3)) %&gt;% kable( col.names = c(“Origin”, “Production avg”, “Employment agri avg”, “Rural growth avg”, “Investment avg”, “ESG proxy score”) ) %&gt;% kable_styling(full_width = FALSE)</p>
+<p>p5 &lt;- esg_score %&gt;% ggplot(aes(x = reorder(country, esg_score), y = esg_score)) + geom_col() + coord_flip() + scale_y_continuous(labels = label_percent(accuracy = 1)) + labs( title = “ESG proxy score (illustrative)”, subtitle = “A transparent scoring method to support strategic discussions”, x = “Origin”, y = “Score (0–1)” ) + theme_minimal(base_size = 13)</p>
+<section id="p5" class="level2">
+<h2 class="anchored" data-anchor-id="p5">p5</h2>
+</section>
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">1. Executive Summary</h2>
+<p>This report benchmarks the ESG-relevant performance of four key green coffee origins (Brazil, Colombia, Peru, Honduras) to support sourcing decisions for a fictitious European green coffee importer:</p>
+<p><strong>Andean Green Coffee Europe S.L. (Spain).</strong></p>
+<p>The analysis combines:</p>
+<ul>
+<li></li>
+<li><p><strong>FAOSTAT production data</strong> (supply concentration &amp; volume risk)</p></li>
+<li></li>
+<li><p><strong>World Bank rural/social indicators</strong> (social exposure &amp; vulnerability)</p></li>
+<li></li>
+</ul>
+<p>The objective is not to “rank countries morally”, but to provide a structured decision framework to support ESG-aware sourcing.</p>
+<p><strong>Business question:</strong><br>
+How can a European green coffee importer compare coffee origins using a transparent ESG-oriented framework?</p>
+<p><strong>Core origins analyzed:</strong> Brazil, Colombia, Peru, Honduras.</p>
+</section>
+<section id="context-strategic-use-case" class="level2">
+<h2 class="anchored" data-anchor-id="context-strategic-use-case">2. Context &amp; Strategic Use Case</h2>
+<p>European green coffee buyers face a dual pressure:</p>
+<ul>
+<li></li>
+<li><p><strong>Cost and reliability</strong> (volume, production stability, diversification)</p></li>
+<li></li>
+<li><p><strong>ESG and compliance</strong> (social risk, rural vulnerability, long-term sustainability)</p></li>
+<li></li>
+</ul>
+<p>Key hypotheses:</p>
+<ul>
+<li></li>
+<li><p>Brazil dominates supply, creating portfolio concentration risk.</p></li>
+<li></li>
+<li><p>Higher rural/agricultural dependence can signal higher social exposure.</p></li>
+<li></li>
+<li><p>ESG trade-offs appear clearly: high-volume origins ≠ lowest vulnerability.</p></li>
+<li></li>
+</ul>
+</section>
+<section id="data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources">3. Data Sources</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Provider</th>
+<th>Proxy Dimension</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coffee production</td>
+<td>FAOSTAT</td>
+<td>Supply / concentration risk</td>
+<td>Tonnes per year</td>
+</tr>
+<tr class="even">
+<td>Employment in agriculture (%)</td>
+<td>World Bank</td>
+<td>Social vulnerability</td>
+<td>Higher = more dependence</td>
+</tr>
+<tr class="odd">
+<td>Rural population growth (%)</td>
+<td>World Bank</td>
+<td>Demographic pressure</td>
+<td>Proxy for rural stress</td>
+</tr>
+<tr class="even">
+<td>Gross domestic investment (% GDP)</td>
+<td>World Bank</td>
+<td>Economic capacity</td>
+<td>Proxy for resilience</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="assumptions-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-limitations">4. Assumptions &amp; Limitations</h2>
+<p>This is not a real ESG rating model.<br>
+It is a training-grade decision framework designed to:</p>
+<ul>
+<li></li>
+<li><p>be transparent</p></li>
+<li></li>
+<li><p>be reproducible</p></li>
+<li></li>
+<li><p>produce interpretable insights</p></li>
+<li></li>
+</ul>
+</section>
+<section id="load-processed-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-processed-data">5. Load Processed Data</h2>
+<pre><code>library(readr) library(dplyr) library(tidyr) library(scales) library(ggplot2) library(knitr) library(kableExtra)  BASE &lt;- "C:/Users/juanp/Documents/Meh" PROCESSED &lt;- file.path(BASE, "data", "processed")  coffee &lt;- read_csv(file.path(PROCESSED, "coffee_clean.csv")) full_data &lt;- read_csv(file.path(PROCESSED, "full_data.csv")) esg_score &lt;- read_csv(file.path(PROCESSED, "esg_score.csv"))  glimpse(coffee) </code></pre>
+</section>
+<section id="production-benchmarking-faostat" class="level2">
+<h2 class="anchored" data-anchor-id="production-benchmarking-faostat">6. Production Benchmarking (FAOSTAT)</h2>
+<section id="production-trends-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="production-trends-over-time">6.1 Production trends over time</h3>
+<p>Shows long-term supply dominance and concentration risks.</p>
+<pre><code>p1 &lt;- coffee %&gt;%   ggplot(aes(x = year, y = production_tonnes, color = country)) +   geom_line(linewidth = 1.2) +   scale_y_continuous(labels = label_number(scale = 1e-6, suffix = "M t")) +   labs(     title = "Coffee production trends (FAOSTAT)",     subtitle = "Brazil dominates total supply among the selected origins",     x = "Year",     y = "Production (tonnes)",     color = "Origin"   ) +   theme_minimal(base_size = 13) +   theme(legend.position = "bottom")  p1 </code></pre>
+</section>
+<section id="average-production-last-5-years" class="level3">
+<h3 class="anchored" data-anchor-id="average-production-last-5-years">6.2 Average production (last 5 years)</h3>
+<p>A sourcing portfolio must account for supply concentration risk.</p>
+<pre><code>ranking &lt;- coffee %&gt;%   filter(year &gt;= max(year, na.rm = TRUE) - 4) %&gt;%   group_by(country) %&gt;%   summarise(avg_prod = mean(production_tonnes, na.rm = TRUE), .groups = "drop") %&gt;%   arrange(desc(avg_prod))  p2 &lt;- ranking %&gt;%   ggplot(aes(x = reorder(country, avg_prod), y = avg_prod)) +   geom_col() +   coord_flip() +   scale_y_continuous(labels = label_number(scale = 1e-6, suffix = "M t")) +   labs(     title = "Average coffee production (last 5 years)",     subtitle = "Supply concentration should be treated as a strategic sourcing risk",     x = "Origin",     y = "Average production (tonnes)"   ) +   theme_minimal(base_size = 13)  p2 </code></pre>
+</section>
+</section>
+<section id="social-rural-indicators-world-bank" class="level2">
+<h2 class="anchored" data-anchor-id="social-rural-indicators-world-bank">7. Social &amp; Rural Indicators (World Bank)</h2>
+<section id="employment-in-agriculture-proxy-rural-dependence" class="level3">
+<h3 class="anchored" data-anchor-id="employment-in-agriculture-proxy-rural-dependence">7.1 Employment in agriculture (proxy: rural dependence)</h3>
+<pre><code>p3 &lt;- full_data %&gt;%   ggplot(aes(x = year, y = poverty_rate, color = country)) +   geom_line(linewidth = 1.1) +   labs(     title = "Employment in agriculture (%)",     subtitle = "Higher values suggest higher dependence on rural/agricultural livelihoods",     x = "Year",     y = "% of total employment",     color = "Origin"   ) +   theme_minimal(base_size = 13) +   theme(legend.position = "bottom")  p3 </code></pre>
+</section>
+<section id="rural-population-growth-proxy-rural-pressure" class="level3">
+<h3 class="anchored" data-anchor-id="rural-population-growth-proxy-rural-pressure">7.2 Rural population growth (proxy: rural pressure)</h3>
+<pre><code>p4 &lt;- full_data %&gt;%   ggplot(aes(x = year, y = rural_growth, color = country)) +   geom_line(linewidth = 1.1) +   labs(     title = "Rural population growth (%)",     subtitle = "A proxy for demographic pressure and rural transformation",     x = "Year",     y = "Annual growth (%)",     color = "Origin"   ) +   theme_minimal(base_size = 13) +   theme(legend.position = "bottom")  p4 </code></pre>
+</section>
+</section>
+<section id="proxy-esg-score-transparent-model" class="level2">
+<h2 class="anchored" data-anchor-id="proxy-esg-score-transparent-model">8. Proxy ESG Score (Transparent model)</h2>
+<section id="score-table" class="level3">
+<h3 class="anchored" data-anchor-id="score-table">8.1 Score table</h3>
+<pre><code>esg_score %&gt;%   arrange(desc(esg_score)) %&gt;%   mutate(esg_score = round(esg_score, 3)) %&gt;%   kable(     col.names = c("Origin", "Production avg", "Employment agri avg", "Rural growth avg", "Investment avg", "ESG proxy score")   ) %&gt;%   kable_styling(full_width = FALSE) </code></pre>
+</section>
+<section id="visual-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="visual-comparison">8.2 Visual comparison</h3>
+<pre><code>p5 &lt;- esg_score %&gt;%   ggplot(aes(x = reorder(country, esg_score), y = esg_score)) +   geom_col() +   coord_flip() +   scale_y_continuous(labels = label_percent(accuracy = 1)) +   labs(     title = "ESG proxy score (illustrative)",     subtitle = "A transparent scoring method to support strategic discussions",     x = "Origin",     y = "Score (0–1)"   ) +   theme_minimal(base_size = 13)  p5 </code></pre>
+</section>
+</section>
+<section id="strategic-recommendations-3" class="level2">
+<h2 class="anchored" data-anchor-id="strategic-recommendations-3">9. Strategic Recommendations (3)</h2>
+<section id="recommendation-1-diversify-away-from-concentration-risk" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-1-diversify-away-from-concentration-risk">Recommendation 1 — Diversify away from concentration risk</h3>
+<p>Brazil should remain a core origin, but the portfolio must reduce dependency by increasing contracts with mid-scale origins.</p>
+</section>
+<section id="recommendation-2-integrate-a-social-exposure-lens" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-2-integrate-a-social-exposure-lens">Recommendation 2 — Integrate a “Social Exposure Lens”</h3>
+<p>Origins with high agricultural employment should be prioritized for social compliance programs (traceability, farmer income protection).</p>
+</section>
+<section id="recommendation-3-use-esg-proxy-scores-only-as-a-discussion-tool" class="level3">
+<h3 class="anchored" data-anchor-id="recommendation-3-use-esg-proxy-scores-only-as-a-discussion-tool">Recommendation 3 — Use ESG proxy scores only as a discussion tool</h3>
+<p>This model is not a rating system. It is a decision framework to structure sourcing debates and highlight trade-offs.</p>
+</section>
+</section>
+<section id="next-iteration-version-3-roadmap" class="level2">
+<h2 class="anchored" data-anchor-id="next-iteration-version-3-roadmap">10. Next Iteration (Version 3 roadmap)</h2>
+<ul>
+<li></li>
+<li><p>Add climate risk indicators (temperature anomalies, precipitation, deforestation)</p></li>
+<li></li>
+<li><p>Add trade indicators (export dependence to EU)</p></li>
+<li></li>
+<li><p>Add coffee price volatility and risk signals</p></li>
+<li></li>
+<li><p>Improve scoring method with weighting sensitivity tests</p></li>
+<li></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

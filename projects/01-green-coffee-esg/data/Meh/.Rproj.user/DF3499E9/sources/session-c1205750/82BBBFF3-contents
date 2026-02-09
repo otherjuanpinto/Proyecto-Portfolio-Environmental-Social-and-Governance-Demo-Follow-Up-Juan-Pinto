@@ -1,0 +1,15 @@
+project:
+  type: website
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    df-print: paged
+
+execute:
+  echo: false
+  warning: false
+  message: false

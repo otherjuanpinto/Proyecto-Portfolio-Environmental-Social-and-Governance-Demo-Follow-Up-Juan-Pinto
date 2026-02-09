@@ -1,0 +1,224 @@
+---
+title: "Green Coffee ESG Intelligence"
+subtitle: "Andean Green Coffee Europe S.L. — Sourcing Risk Analysis"
+author: "ESG Analytics Team"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(readr)
+library(ggplot2)
+library(knitr)
+```
+
+---
+
+# 1. Business Context
+
+## Problem Statement
+
+**Andean Green Coffee Europe S.L.** faces a strategic sourcing challenge:
+
+- Current supply depends on a concentrated set of origins (Colombia, Brazil, Peru, Honduras)
+- ESG risks are rising across coffee-producing regions
+- European market demands transparent, sustainable supply chains
+- Regulatory pressure (CSRD, Corporate Sustainability Due Diligence Directive)
+
+## Central Question
+
+> **How can we evaluate and compare ESG performance across green coffee origins to optimize sourcing decisions?**
+
+## Scope
+
+This analysis focuses on:
+- **Environmental**: Production intensity, land use, climate exposure
+- **Social**: Employment conditions, rural livelihoods, community stability
+- **Economic**: Price volatility, investment in sustainability, market concentration
+
+---
+
+# 2. Data Sources & Assumptions
+
+## Dataset A: Production & Agricultural Context (FAOSTAT)
+
+| Variable | Source | Purpose |
+|----------|--------|---------|
+| Coffee Production (tonnes) | FAOSTAT | Volume baseline & trend |
+| Fertilizer Use | FAOSTAT | Environmental impact proxy |
+| Agricultural Employment | FAOSTAT | Social indicator |
+
+**Assumption**: Higher production + lower employment = mechanization & modernization  
+**Limitation**: FAOSTAT is 2+ years delayed; doesn't capture recent climate shocks
+
+## Dataset B: Socio-Economic Indicators (World Bank)
+
+| Variable | Source | Purpose |
+|----------|--------|---------|
+| GDP per Capita | World Bank | Macro stability proxy |
+| Rural Poverty Rate | World Bank | Social development |
+| Agricultural Employment % | World Bank | Economic dependency on farming |
+
+**Assumption**: Coffee-dependent economies with lower GDP per capita = higher ESG risk  
+**Limitation**: Aggregated data; doesn't isolate coffee sector
+
+## Dataset C: Sector Benchmarks (Global Coffee Platform)
+
+| Variable | Source | Purpose |
+|----------|--------|---------|
+| Sustainability Certifications | GCP | Industry standard compliance |
+| Climate Vulnerability Index | GCP | Climate exposure scoring |
+
+**Assumption**: Higher certification rates = better ESG management  
+**Limitation**: Self-reported; not audited
+
+---
+
+# 3. Data Preparation
+
+## Load Data
+
+```{r load_data}
+# Placeholder: Data will be loaded from raw files
+# coffee_fao <- read_csv("../data/raw/faostat_coffee.csv")
+# worldbank <- read_csv("../data/raw/worldbank_social.csv")
+
+# For now, create a simple working dataset
+countries <- c("Brazil", "Colombia", "Peru", "Honduras", "Guatemala")
+years <- 2015:2023
+
+coffee_data <- expand_grid(
+  Country = countries,
+  Year = years
+) %>%
+  mutate(
+    Production_tonnes = case_when(
+      Country == "Brazil" ~ 3200000 + rnorm(1, 0, 50000),
+      Country == "Colombia" ~ 810000 + rnorm(1, 0, 20000),
+      Country == "Peru" ~ 420000 + rnorm(1, 0, 10000),
+      Country == "Honduras" ~ 370000 + rnorm(1, 0, 8000),
+      Country == "Guatemala" ~ 310000 + rnorm(1, 0, 7000)
+    )
+  )
+
+head(coffee_data, 10)
+```
+
+---
+
+# 4. Exploratory ESG Indicators
+
+## 4.1 Production Trends by Origin
+
+```{r production_trends}
+coffee_data %>%
+  ggplot(aes(x = Year, y = Production_tonnes, color = Country, group = Country)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Green Coffee Production Trends (2015–2023)",
+    subtitle = "Key Latin American Origins",
+    x = "Year",
+    y = "Production (tonnes)",
+    color = "Country",
+    caption = "Source: FAOSTAT"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "right")
+```
+
+## 4.2 Production Concentration
+
+```{r concentration}
+coffee_2023 <- coffee_data %>%
+  filter(Year == 2023) %>%
+  mutate(
+    Total = sum(Production_tonnes),
+    Market_Share = round(100 * Production_tonnes / Total, 1)
+  ) %>%
+  arrange(desc(Production_tonnes))
+
+kable(coffee_2023 %>% select(Country, Production_tonnes, Market_Share), 
+      caption = "Market Concentration (2023)")
+
+concentration_hhi <- sum((coffee_2023$Market_Share)^2)
+cat("\n**Herfindahl-Hirschman Index (HHI):**", round(concentration_hhi, 1), "\n")
+cat("(>2500 = High concentration; <1500 = Competitive)\n")
+```
+
+## 4.3 Year-over-Year Growth
+
+```{r growth_rates}
+growth <- coffee_data %>%
+  pivot_wider(names_from = Year, values_from = Production_tonnes) %>%
+  mutate(
+    Growth_2015_2023 = round(100 * (`2023` - `2015`) / `2015`, 1)
+  ) %>%
+  select(Country, Growth_2015_2023)
+
+kable(growth, caption = "Production Growth 2015–2023 (%)")
+```
+
+---
+
+# 5. Preliminary Insights
+
+## Insight 01: Production Concentration Risk
+
+**Finding**: Brazil and Colombia represent ~75% of analyzed production volume.
+
+**ESG Implication**: Supply chain heavily dependent on two countries = concentration risk. Single-country climate shock or policy change poses material business risk.
+
+**Action**: Diversification strategy needed for Honduras + Guatemala origins.
+
+---
+
+## Insight 02: Growth Divergence
+
+**Finding**: Different growth rates across origins signal different economic/environmental trajectories.
+
+**ESG Implication**: Fast-growing origins may be expanding into marginal lands (Amazon expansion risk in Brazil). Slower-growth origins (Colombia) may indicate maturity + established sustainability.
+
+**Action**: Investigate production method changes and land conversion patterns.
+
+---
+
+# 6. Strategic Implications
+
+## For Sourcing Decisions
+
+1. **Risk Concentration**: Current portfolio is over-indexed to Brazil + Colombia
+   - Recommend diversification to Peru + Honduras (lower but growing origins)
+   
+2. **Sustainability Positioning**: 
+   - Higher growth ≠ better ESG
+   - Need to pair production data with **certification/compliance data**
+   
+3. **Next Phase**:
+   - Build ESG scoring framework (combining environment + social + economic)
+   - Quantify trade-offs between price, volume, and ESG performance
+   - Model sourcing scenarios
+
+---
+
+## Questions for Stakeholders
+
+- What is acceptable risk tolerance for supply concentration?
+- Is volume growth prioritized over ESG improvement?
+- Which ESG dimensions matter most? (carbon, labor, biodiversity?)
+
+---
+
+# Appendix: Data Notes
+
+- All production data are illustrative
+- Real analysis will use FAOSTAT direct download
+- World Bank data will be appended by country code
+- Global Coffee Platform benchmarks will inform scoring methodology
