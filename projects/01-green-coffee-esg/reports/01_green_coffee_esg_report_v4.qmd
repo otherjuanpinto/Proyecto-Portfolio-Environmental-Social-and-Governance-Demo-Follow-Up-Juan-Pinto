@@ -1,0 +1,61 @@
+---
+{r}
+#| label: setup-libraries
+#| include: false
+
+suppressPackageStartupMessages({
+  library(readr)
+  library(dplyr)
+  library(tidyr)
+  library(ggplot2)
+  library(scales)
+  library(janitor)
+  library(knitr)
+  library(here)
+  library(gt)
+  library(plotly)
+})
+---
+
+::: {.title-block style="padding: 1em; margin-block-end: 1em; background-color: rgb(243, 243, 243) !important; position: relative;"}
+# Executive Summary {style="line-height: 1.2;"}
+
+This report benchmarks four coffee origins (**Brazil, Colombia, Peru, Honduras**) using open data indicators across:
+
+-   **Production** (FAOSTAT)
+-   **Employment in agriculture (% total employment)** (World Bank)
+-   **Rural population growth (%)** (World Bank)
+-   **Gross capital formation (% GDP)** (World Bank)
+
+The purpose is to generate a transparent ESG-style sourcing signal.
+:::
+
+# Production {style="line-height: 1.2;"}
+
+## Production trends {style="line-height: 1.2;"}
+
+# Social Indicators {style="line-height: 1.2;"}
+
+## Employment in agriculture {style="line-height: 1.2;"}
+
+## Rural population growth {style="line-height: 1.2;"}
+
+# Economic Capacity {style="line-height: 1.2;"}
+
+## Investment (% GDP) {style="line-height: 1.2;"}
+
+# ESG Composite Score {style="line-height: 1.2;"}
+
+## Score table (gt) {style="line-height: 1.2;"}
+
+# Notes & Limitations {style="line-height: 1.2;"}
+
+-   This model is a benchmarking signal, not an ESG certification.
+-   Indicators are macro-level and do not capture farm-level realities.
+-   Results depend on data availability and the last 5-year window.
+
+# Next Steps {style="line-height: 1.2;"}
+
+-   Add environmental indicators (forest loss, emissions, water stress)
+-   Add governance proxies (rule of law, corruption perception)
+-   Build a sourcing recommendation layer

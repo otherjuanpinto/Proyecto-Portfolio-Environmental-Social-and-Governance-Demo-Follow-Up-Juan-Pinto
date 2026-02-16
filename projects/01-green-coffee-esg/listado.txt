@@ -1,0 +1,14 @@
+C:\Users\juanp\Documents\PROYEESG 1\FAOSTAT.csv
+C:\Users\juanp\Documents\PROYEESG 1\GDP
+C:\Users\juanp\Documents\PROYEESG 1\listado.txt
+C:\Users\juanp\Documents\PROYEESG 1\POVERTY
+C:\Users\juanp\Documents\PROYEESG 1\RURAL
+C:\Users\juanp\Documents\PROYEESG 1\GDP\API_NE.GDI.TOTL.ZS_DS2_en_csv_v2_2220.csv
+C:\Users\juanp\Documents\PROYEESG 1\GDP\Metadata_Country_API_NE.GDI.TOTL.ZS_DS2_en_csv_v2_2220.csv
+C:\Users\juanp\Documents\PROYEESG 1\GDP\Metadata_Indicator_API_NE.GDI.TOTL.ZS_DS2_en_csv_v2_2220.csv
+C:\Users\juanp\Documents\PROYEESG 1\POVERTY\API_SL.AGR.EMPL.ZS_DS2_en_csv_v2_135.csv
+C:\Users\juanp\Documents\PROYEESG 1\POVERTY\Metadata_Country_API_SL.AGR.EMPL.ZS_DS2_en_csv_v2_135.csv
+C:\Users\juanp\Documents\PROYEESG 1\POVERTY\Metadata_Indicator_API_SL.AGR.EMPL.ZS_DS2_en_csv_v2_135.csv
+C:\Users\juanp\Documents\PROYEESG 1\RURAL\API_SP.RUR.TOTL.ZG_DS2_en_csv_v2_725.csv
+C:\Users\juanp\Documents\PROYEESG 1\RURAL\Metadata_Country_API_SP.RUR.TOTL.ZG_DS2_en_csv_v2_725.csv
+C:\Users\juanp\Documents\PROYEESG 1\RURAL\Metadata_Indicator_API_SP.RUR.TOTL.ZG_DS2_en_csv_v2_725.csv

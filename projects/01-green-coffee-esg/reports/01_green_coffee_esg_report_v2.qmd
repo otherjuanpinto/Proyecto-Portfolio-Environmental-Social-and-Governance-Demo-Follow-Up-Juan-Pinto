@@ -1,0 +1,300 @@
+---
+title: "Green Coffee ESG Intelligence"
+subtitle: "Comparative Analysis of Four Coffee Origins Using Open Data"
+author: "Juan Paulo Pinto Sandoval"
+date: today
+date-format: "MMMM DD, YYYY"
+
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    number-sections: true
+    theme: 
+      - cosmo
+      - ../custom.scss
+    page-layout: article
+    df-print: paged
+    code-fold: true
+    code-tools: false
+    embed-resources: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: false
+  freeze: false
+
+knitr:
+  opts_chunk:
+    fig.align: 'center'
+    out.width: '100%'
+---
+
+```{r}
+#| label: setup-libraries
+#| include: false
+
+suppressPackageStartupMessages({
+  library(readr)
+  library(dplyr)
+  library(tidyr)
+  library(ggplot2)
+  library(scales)
+  library(janitor)
+  library(knitr)
+  library(here)
+  library(gt)
+  library(plotly)
+})
+```
+
+```{r}
+#| label: setup-theme
+#| include: false
+
+# Paleta de colores por país
+country_colors <- c(
+  "Brazil" = "#228B22",
+  "Colombia" = "#DAA520",
+  "Peru" = "#CD853F",
+  "Honduras" = "#8B4513"
+)
+
+# Tema consultoría
+theme_consulting <- function() {
+  theme_minimal(base_size = 13) +
+    theme(
+      plot.title = element_text(face = "bold", size = 16, color = "#1a252f"),
+      plot.subtitle = element_text(size = 12, color = "#555555", margin = margin(b = 15)),
+      plot.caption = element_text(size = 9, color = "#888888", hjust = 0),
+      legend.position = "bottom",
+      legend.title = element_text(face = "bold", size = 11),
+      panel.grid.minor = element_blank(),
+      panel.grid.major = element_line(color = "#e0e0e0", linewidth = 0.3),
+      axis.title = element_text(face = "bold", size = 11),
+      axis.text = element_text(color = "#555555")
+    )
+}
+```
+
+```{r}
+#| label: load-data
+#| include: false
+
+# IMPORTANTÍSIMO:
+# Tu QMD está dentro de /reports
+# Entonces usamos ../ para volver a la raíz del proyecto.
+
+full_data_raw <- read_csv("../data/processed/full_data.csv", show_col_types = FALSE)
+esg_score_raw <- read_csv("../data/processed/esg_score.csv", show_col_types = FALSE)
+
+full_data <- full_data_raw |>
+  clean_names()
+
+esg_score <- esg_score_raw |>
+  clean_names() |>
+  arrange(desc(esg_score))
+
+# Columnas esperadas en tu CSV real:
+# production_tonnes
+# employment_agri_pct
+# rural_pop_growth_pct
+# investment_pct_gdp
+
+full_data <- full_data |>
+  select(
+    country,
+    year,
+    production_tonnes,
+    employment_agri_pct,
+    rural_pop_growth_pct,
+    investment_pct_gdp
+  ) |>
+  rename(
+    production = production_tonnes,
+    employment_agri = employment_agri_pct,
+    rural_growth = rural_pop_growth_pct,
+    investment = investment_pct_gdp
+  )
+
+latest_year <- max(full_data$year, na.rm = TRUE)
+
+key_stats <- full_data |>
+  filter(year == latest_year) |>
+  arrange(desc(production))
+```
+
+::: title-block
+# Executive Summary
+
+This report benchmarks four coffee origins (**Brazil, Colombia, Peru, Honduras**) using open data indicators across:
+
+-   **Production** (FAOSTAT)
+-   **Employment in agriculture (% total employment)** (World Bank)
+-   **Rural population growth (%)** (World Bank)
+-   **Gross capital formation (% GDP)** (World Bank)
+
+The purpose is to generate a transparent ESG-style sourcing signal.
+:::
+
+------------------------------------------------------------------------
+
+# Production
+
+## Production trends
+
+```{r}
+#| label: fig-production-trends
+#| fig-cap: "Coffee production evolution (tonnes)"
+
+p_prod <- full_data |>
+  filter(!is.na(production)) |>
+  ggplot(aes(x = year, y = production, color = country)) +
+  geom_line(linewidth = 1.2, alpha = 0.9) +
+  geom_point(size = 2, alpha = 0.6) +
+  scale_color_manual(values = country_colors) +
+  scale_y_continuous(labels = label_number(big.mark = ",")) +
+  labs(
+    title = "Production Trends",
+    subtitle = "FAOSTAT - green coffee (tonnes)",
+    x = NULL,
+    y = "Tonnes",
+    color = "Origin",
+    caption = "Source: FAOSTAT"
+  ) +
+  theme_consulting()
+
+ggplotly(p_prod)
+```
+
+------------------------------------------------------------------------
+
+# Social Indicators
+
+## Employment in agriculture
+
+```{r}
+#| label: fig-employment-agri
+#| fig-cap: "Employment in agriculture (% of total employment)"
+
+p_emp <- full_data |>
+  filter(!is.na(employment_agri)) |>
+  ggplot(aes(x = year, y = employment_agri, color = country)) +
+  geom_line(linewidth = 1.2, alpha = 0.9) +
+  geom_point(size = 2, alpha = 0.6) +
+  scale_color_manual(values = country_colors) +
+  scale_y_continuous(labels = label_number(suffix = "%")) +
+  labs(
+    title = "Agricultural Employment Dependency",
+    subtitle = "Higher values suggest higher rural dependency",
+    x = NULL,
+    y = "% of total employment",
+    color = "Origin",
+    caption = "Source: World Bank (SL.AGR.EMPL.ZS)"
+  ) +
+  theme_consulting()
+
+ggplotly(p_emp)
+```
+
+## Rural population growth
+
+```{r}
+#| label: fig-rural-growth
+#| fig-cap: "Rural population growth (annual %)"
+
+p_rural <- full_data |>
+  filter(!is.na(rural_growth)) |>
+  ggplot(aes(x = year, y = rural_growth, color = country)) +
+  geom_line(linewidth = 1.2, alpha = 0.9) +
+  geom_point(size = 2, alpha = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.7) +
+  scale_color_manual(values = country_colors) +
+  scale_y_continuous(labels = label_number(suffix = "%")) +
+  labs(
+    title = "Rural Population Growth",
+    subtitle = "Demographic pressure proxy",
+    x = NULL,
+    y = "Annual growth (%)",
+    color = "Origin",
+    caption = "Source: World Bank (SP.RUR.TOTL.ZG)"
+  ) +
+  theme_consulting()
+
+ggplotly(p_rural)
+```
+
+------------------------------------------------------------------------
+
+# Economic Capacity
+
+## Investment (% GDP)
+
+```{r}
+#| label: fig-investment
+#| fig-cap: "Gross capital formation (% GDP)"
+
+p_inv <- full_data |>
+  filter(!is.na(investment)) |>
+  ggplot(aes(x = year, y = investment, color = country)) +
+  geom_line(linewidth = 1.2, alpha = 0.9) +
+  geom_point(size = 2, alpha = 0.6) +
+  scale_color_manual(values = country_colors) +
+  scale_y_continuous(labels = label_number(suffix = "%")) +
+  labs(
+    title = "Investment Capacity",
+    subtitle = "Macro proxy for infrastructure & productivity",
+    x = NULL,
+    y = "% of GDP",
+    color = "Origin",
+    caption = "Source: World Bank (NE.GDI.TOTL.ZS)"
+  ) +
+  theme_consulting()
+
+ggplotly(p_inv)
+```
+
+------------------------------------------------------------------------
+
+# ESG Composite Score
+
+## Score table (gt)
+
+```{r}
+#| label: tbl-esg-gt
+
+esg_score |>
+  gt() |>
+  tab_header(
+    title = "ESG Composite Score",
+    subtitle = "5-year normalized scoring model"
+  ) |>
+  fmt_number(
+    columns = esg_score,
+    decimals = 3
+  ) |>
+  tab_style(
+    style = cell_fill(color = "#228B22", alpha = 0.3),
+    locations = cells_body(
+      columns = esg_score,
+      rows = esg_score == max(esg_score)
+    )
+  )
+```
+
+------------------------------------------------------------------------
+
+# Notes & Limitations
+
+-   This model is a benchmarking signal, not an ESG certification.
+-   Indicators are macro-level and do not capture farm-level realities.
+-   Results depend on data availability and the last 5-year window.
+
+# Next Steps
+
+-   Add environmental indicators (forest loss, emissions, water stress)
+-   Add governance proxies (rule of law, corruption perception)
+-   Build a sourcing recommendation layer

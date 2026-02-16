@@ -1,0 +1,33 @@
+---
+title: "Green Coffee ESG Intelligence"
+subtitle: "Comparative Analysis of Four Coffee Origins Using Open Data"
+author: "Juan Paulo Pinto Sandoval"
+date: today
+date-format: "MMMM DD, YYYY"
+
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    number-sections: true
+    theme: 
+      - cosmo
+      - ../custom.scss
+    page-layout: article
+    df-print: paged
+    code-fold: true
+    code-tools: false
+    embed-resources: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: false
+
+knitr:
+  opts_chunk:
+    fig.align: 'center'
+    out.width: '100%'
+---
